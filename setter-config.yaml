@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: setter-config
 data:
-  replicas: "1"
+  replicas: "2"
