@@ -1,20 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
+  name: nginx
+  labels:
+    component: nginx
 spec:
-  replicas: 2 # kpt-set: ${replicas}
+  replicas: 1 # kpt-set: ${replicas}
   selector:
     matchLabels:
-      app: my-nginx
+      component: nginx
   template:
     metadata:
       labels:
-        app: my-nginx
+        component: nginx
     spec:
       containers:
         - name: nginx
-          image: nginx:1.16.1
+          image: nginx:1.16.1 # kpt-set: nginx:${tag}
           ports:
             - protocol: TCP
               containerPort: 80
+          requests:
+            memory: "512Mi" # kpt-set: ${resources.requests.memory}
+            cpu: "500m" # kpt-set: ${resources.requests.cpu}
+          limits:
+            memory: "1024Mi" # kpt-set: ${resources.limits.memory}
+            cpu: "1000m" # kpt-set: ${resources.limits.cpu}

@@ -1,0 +1,9 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx
+spec:
+  maxUnavailable: 0 # kpt-set: ${maxUnavailable}
+  selector:
+    matchLabels:
+      component: nginx
