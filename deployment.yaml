@@ -2,19 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-nginx
-  labels:
-    env: dev
 spec:
-  replicas: 1 # kpt-set: ${replicas}
+  replicas: 2 # kpt-set: ${replicas}
   selector:
     matchLabels:
       app: my-nginx
-      env: dev
   template:
     metadata:
       labels:
         app: my-nginx
-        env: dev
     spec:
       containers:
         - name: nginx
